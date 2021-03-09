@@ -1,8 +1,14 @@
 package lamda.stream;
 
+import com.sun.org.apache.xerces.internal.util.Status;
+import lamda.stream.model.Employee;
+import lamda.stream.model.Transaction;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,5 +47,23 @@ public class StreamStudy {
         r.forEach(e-> System.out.println(e));
 
 
+        List<Employee> emps = Arrays.asList(
+                new Employee(1, "Emma", 41),
+                new Employee(2, "Mary", 39),
+                new Employee(3, "Allen", 33),
+                new Employee(4, "Olivia", 52),
+                new Employee(5, "Natasha", 27),
+                new Employee(6, "Kevin", 25)
+        );
+        List<Employee> employees=emps.stream().filter(e->e.getAge()>40).collect(Collectors.toList());
+
+        String result=strFun(e->
+            e.substring(0,2), "12344");
+
+
+
+    }
+    public static String strFun(Function<String,String> fun, String str){
+        return fun.apply(str);
     }
 }
