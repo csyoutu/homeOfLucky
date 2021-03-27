@@ -11,39 +11,20 @@ package algorithm.leetcode;
 public class Num28 {
     // abbcdef  bc
     public static int strStr(String haystack, String needle) {
-        if(haystack.isEmpty()||needle.isEmpty()){
+        if(needle.isEmpty()){
             return 0;
         }
-        if(haystack.length()<needle.length()){
+        if(haystack.length()<needle.length())
             return -1;
-        }
-        int i=0,j=0;
-        while (i<haystack.length()){
-            //首字符匹配
-            int re=i;
-            boolean isMatch=true;
-            if(haystack.charAt(i)==needle.charAt(0)){
-                while (j<needle.length()-1){
-                    i++;
-                    j++;
-                    if(haystack.charAt(i)==needle.charAt(j)){
-                        continue;
-                    }
-                    else{
-                        isMatch=false;
-                        break;
-                    }
-                }
-                if(isMatch){
-                    return re;
-                }
+        for(int i=0;i<haystack.length();i++){
+            if(i+needle.length()>haystack.length()){
+                return -1;
             }
-            if(!isMatch){
-                i=re;
+            if(haystack.substring(i,i+needle.length()).equals(needle)){
+                return i;
             }
-            i++;
         }
-        return -1;
+        return  -1;
     }
 
     public static void main(String[] args) {
