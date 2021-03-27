@@ -1,7 +1,7 @@
 package lamda.stream;
 
-import com.sun.org.apache.xerces.internal.util.Status;
 import lamda.stream.model.Employee;
+import lamda.stream.model.Status;
 import lamda.stream.model.Transaction;
 
 import java.util.ArrayList;
@@ -48,12 +48,12 @@ public class StreamStudy {
 
 
         List<Employee> emps = Arrays.asList(
-                new Employee(1, "Emma", 41),
-                new Employee(2, "Mary", 39),
-                new Employee(3, "Allen", 33),
-                new Employee(4, "Olivia", 52),
-                new Employee(5, "Natasha", 27),
-                new Employee(6, "Kevin", 25)
+                new Employee(1, "Emma", 41,1000, Status.BUSY),
+                new Employee(2, "Mary", 39,3000, Status.FREE),
+                new Employee(3, "Allen", 33,1000, Status.BUSY),
+                new Employee(4, "Olivia", 52,1000, Status.FREE),
+                new Employee(5, "Natasha", 27,1000, Status.BUSY),
+                new Employee(6, "Kevin", 25,1000, Status.FREE)
         );
         List<Employee> employees=emps.stream().filter(e->e.getAge()>40).collect(Collectors.toList());
 

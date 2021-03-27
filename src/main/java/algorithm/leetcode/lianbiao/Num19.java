@@ -1,4 +1,4 @@
-package algorithm.leetcode;
+package algorithm.leetcode.lianbiao;
 
 import algorithm.leetcode.model.ListNode;
 
