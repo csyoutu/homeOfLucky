@@ -1,10 +1,18 @@
 package spark;
 
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.api.java.function.Function;
+import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFunction;
+import scala.Tuple2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -48,8 +56,50 @@ public class RddTransfer {
         System.out.println("l1---"+l1.count());
         JavaRDD<Student> f1 = l1.filter(e -> e.getAge() > 18);
         System.out.println("f1---"+f1.count());
-        JavaRDD<Student> l2=sc.parallelize(s1);
-        JavaRDD<Student> l3=sc.parallelize(s1);
+        JavaRDD<Student> l2=sc.parallelize(s2);
+        JavaRDD<Student> l3=sc.parallelize(s3);
 
+        JavaRDD<Student> f2 = l1.filter(new Function<Student, Boolean>() {
+            @Override
+            public Boolean call(Student student) throws Exception {
+                return student.getAge() > 10 && student.getMath() > 85;
+            }
+        });
+        System.out.println("f2---"+f2.count());
+        JavaRDD<Student> f3 = l1.filter(new function1());
+        l1.flatMap(new FlatMapFunction<Student, String>(){
+
+            @Override
+            public Iterator<String> call(Student student) throws Exception {
+                return student.getLoves().iterator();
+            }
+        });
+
+        l1.reduce(new Function2<Student, Student, Student>() {
+            @Override
+            public Student call(Student student, Student student2) throws Exception {
+                return null;
+            }
+        });
+        JavaPairRDD<String, Student> pair1 = l1.mapToPair(k -> new Tuple2<>(k.getName(), k));
+        JavaPairRDD<String, Student> filter1 = pair1.filter(t -> t._1.equals(""));
+
+        pair1.reduceByKey(new Function2<Student, Student, Student>() {
+            @Override
+            public Student call(Student student, Student student2) throws Exception {
+                Student s=new Student();
+                s.setAge(student.getAge()+student2.getAge());
+                return s;
+            }
+        });
+
+    }
+
+    static class function1 implements Function<Student,Boolean>{
+
+        @Override
+        public Boolean call(Student student) throws Exception {
+            return null;
+        }
     }
 }

@@ -3,6 +3,7 @@ package spark;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created on 2021/4/1.11:35 下午
@@ -18,6 +19,7 @@ public class Student implements Serializable {
     private String sex;
     private double math;
     private int rank;
+    private List<String> loves;
 
     public Student(String name, int age, String sex, double math, int rank) {
         this.name = name;
