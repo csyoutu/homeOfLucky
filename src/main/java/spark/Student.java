@@ -17,7 +17,7 @@ public class Student implements Serializable {
     private String name;
     private int age;
     private String sex;
-    private double math;
+    private Double math;
     private int rank;
     private List<String> loves;
 
