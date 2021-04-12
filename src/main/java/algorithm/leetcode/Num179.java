@@ -3,7 +3,6 @@ package algorithm.leetcode;
 import com.alibaba.fastjson.JSON;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -20,8 +19,8 @@ public class Num179 {
         nums[1] = 1;
         nums[2] = 2;
         nums[3] = 3;
-        nums[4] = 4;
-        nums[5] = 5;
+        nums[4] = 34;
+        nums[5] = 345;
         nums[6] = 6;
         nums[7] = 7;
         nums[8] = 8;
@@ -38,15 +37,16 @@ public class Num179 {
      * @param nums
      * @return
      */
-    public static void largestNumber(int[] nums) {
+    public static String largestNumber(int[] nums) {
         List<String> list = new ArrayList<>();
-        for (int num : nums){
+        for (int num : nums) {
             list.add(Integer.toString(num));
         }
 
-        list.stream().sorted(Comparator.reverseOrder());
+        list.sort(
+                (a, b) -> (b + a).compareTo(a + b));
+        if (list.size() > 0 && list.get(0).equals("0")) return "0";
 
-        System.err.println(JSON.toJSONString(list));
-
+        return String.join("", list);
     }
 }
