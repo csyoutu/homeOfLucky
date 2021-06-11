@@ -1,5 +1,9 @@
 package algorithm.leetcode;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created on 2021/4/12.5:53 下午
  *
@@ -62,6 +66,18 @@ public class NumLCP37 {
         if (pointCount > 1 && minX != maxX && minY != maxY) {
             return (maxY - minY) * (maxX - minX);
         }
+
+        return 0d;
+    }
+
+    public static double minRecSize(int[][] lines) {
+        List<int[]> collect = Arrays.stream(lines).sorted((a, b) -> {
+            if (a[0] == b[0]) return b[1] - a[1];
+            return a[0] - b[0];
+        }).collect(Collectors.toList());
+
+
+
 
         return 0d;
     }
